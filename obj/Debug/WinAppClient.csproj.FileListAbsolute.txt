@@ -1,0 +1,15 @@
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.csprojResolveAssemblyReference.cache
+D:\영어 프로젝트\WinAppClient\obj\Debug\MainWindow.g.cs
+D:\영어 프로젝트\WinAppClient\obj\Debug\App.g.cs
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient_MarkupCompile.cache
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient_MarkupCompile.lref
+D:\영어 프로젝트\WinAppClient\bin\Debug\WinAppClient.exe.config
+D:\영어 프로젝트\WinAppClient\bin\Debug\WinAppClient.exe
+D:\영어 프로젝트\WinAppClient\bin\Debug\WinAppClient.pdb
+D:\영어 프로젝트\WinAppClient\obj\Debug\MainWindow.baml
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.g.resources
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.Properties.Resources.resources
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.csproj.GenerateResource.Cache
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.csproj.CoreCompileInputs.cache
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.exe
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.pdb
