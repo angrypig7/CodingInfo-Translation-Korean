@@ -138,6 +138,7 @@ namespace WinAppClient
         }
 
         internal System.Windows.Controls.ListBox CategoryBar;
+        internal System.Windows.Controls.DockPanel ContentView;
     }
 }
 

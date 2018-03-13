@@ -26,6 +26,7 @@
         </Grid>
         
         <ListBox x:Name="CategoryBar" VerticalAlignment="Top" Width="200" DockPanel.Dock="Left" Margin="0,20,0,0" Height="570"/>
+        <DockPanel x:Name="ContentView" Height="580" Width="650" Margin="0,20,0,0"/>
 
     </DockPanel>
 </Window>
