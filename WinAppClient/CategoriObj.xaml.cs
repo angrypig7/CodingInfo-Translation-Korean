@@ -12,30 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net;
-using System.Net.Sockets;
 
 namespace WinAppClient
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// CategoriObj.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CategoriObj : UserControl
     {
-        public MainWindow()
+        String name;
+
+        public CategoriObj()
         {
             InitializeComponent();
+            name = "Name";
         }
 
-        private void ContentView_Loaded(object sender, RoutedEventArgs e)
+        public CategoriObj(String ObjName)
         {
-            Welcome welcome = new Welcome();
-            ContentPanel.Children.Add(welcome);
+            InitializeComponent();
+
+            name = ObjName;
         }
 
-        private void CategoryBar_Loaded(object sender, RoutedEventArgs e)
+        private void LB_Name_Loaded(object sender, RoutedEventArgs e)
         {
-            CategoryBar.Items.Add(new CategoriObj("C/C++"));
+            LB_Name.Content = name;
         }
     }
 }
