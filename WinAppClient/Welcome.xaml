@@ -16,11 +16,11 @@
 
             </Grid.RowDefinitions>
 
-            <Label Content="소개" FontSize="36" Margin="30,30,0,0"/>
-            <TextBlock x:Name="TBX_Instr" FontSize="24" Margin="30,30,0,0" Grid.Row="1" Loaded="TBX_Instr_Loaded" TextWrapping="Wrap"/>
+            <Label Content="소개" FontSize="36" Margin="30,30,0,0" FontFamily="KoPubDotum Light"/>
+            <TextBlock x:Name="TBX_Instr" FontSize="24" Margin="30,30,0,0" Grid.Row="1" Loaded="TBX_Instr_Loaded" TextWrapping="Wrap" FontFamily="KoPubDotum Light"/>
 
-            <Label Content="개발자 정보" FontSize="36" Margin="30,30,0,0" Grid.Row="2"/>
-            <TextBlock x:Name="TBX_DevInfo" FontSize="24" Margin="30,30,0,0" Grid.Row="3" Loaded="TBX_DevInfo_Loaded" TextWrapping="Wrap"/>
+            <Label Content="개발자 정보" FontSize="36" Margin="30,30,0,0" Grid.Row="2" FontFamily="KoPubDotum Light"/>
+            <TextBlock x:Name="TBX_DevInfo" FontSize="24" Margin="30,30,0,0" Grid.Row="3" Loaded="TBX_DevInfo_Loaded" TextWrapping="Wrap" FontFamily="KoPubDotum Light"/>
 
         </Grid>
 

@@ -57,6 +57,9 @@
     <Compile Include="CategoriObj.xaml.cs">
       <DependentUpon>CategoriObj.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchResult.xaml.cs">
+      <DependentUpon>SearchResult.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TCPClientHandler.cs" />
     <Compile Include="TCPProtocol.cs" />
     <Compile Include="Welcome.xaml.cs">
@@ -78,6 +81,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SearchResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Welcome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -36,6 +36,15 @@ namespace WinAppClient
         private void CategoryBar_Loaded(object sender, RoutedEventArgs e)
         {
             CategoryBar.Items.Add(new CategoriObj("C/C++"));
+            CategoryBar.Items.Add(new CategoriObj("Java"));
+            CategoryBar.Items.Add(new CategoriObj("C#/.Net"));
+            CategoryBar.Items.Add(new CategoriObj("Web"));
+        }
+
+        private void TB_Search_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TB_Search.Text = null;
+            TB_Search.Foreground = Brushes.Black;
         }
     }
 }
