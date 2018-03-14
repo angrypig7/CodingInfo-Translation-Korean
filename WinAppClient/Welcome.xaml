@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="WinAppClient.Welcome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WinAppClient"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="610">
+    <DockPanel x:Name="MainPanel" x:FieldModifier="public" Width="610" Height="700" Background="White" >
+        <Grid x:Name="ScrollViewLayout" DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="250" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="250" />
+
+            </Grid.RowDefinitions>
+
+            <Label Content="소개" FontSize="36" Margin="30,30,0,0"/>
+            <TextBlock x:Name="TBX_Instr" FontSize="24" Margin="30,30,0,0" Grid.Row="1" Loaded="TBX_Instr_Loaded" TextWrapping="Wrap"/>
+
+            <Label Content="개발자 정보" FontSize="36" Margin="30,30,0,0" Grid.Row="2"/>
+            <TextBlock x:Name="TBX_DevInfo" FontSize="24" Margin="30,30,0,0" Grid.Row="3" Loaded="TBX_DevInfo_Loaded" TextWrapping="Wrap"/>
+
+        </Grid>
+
+    </DockPanel>
+</UserControl>

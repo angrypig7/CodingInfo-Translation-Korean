@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinAppClient"
+        xmlns:welcome="clr-namespace:WinAppClient"
         mc:Ignorable="d"
         Title="MainWindow" Width="900" Height="750">
     <DockPanel x:Name="MainPanel" HorizontalAlignment="Center" Height="700" VerticalAlignment="Center" LastChildFill="False" Width="850">
@@ -21,12 +22,13 @@
             </Grid.RowDefinitions>
             
             <Image x:Name="Logo" Height="100" Margin="0" Width="200"/>
-            <TextBox x:Name="TB_Search" Grid.Column="1" Margin="20,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" FontSize="36" Height="50"/>
+            <TextBox x:Name="TB_Search" Grid.Column="1" Margin="20,0,0,0" TextWrapping="Wrap" Text="Search..." VerticalAlignment="Center" FontSize="36" Height="50"/>
             <Button x:Name="BT_Search_Submit" Content="Go!" Grid.Column="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28"/>
         </Grid>
         
-        <ListBox x:Name="CategoryBar" VerticalAlignment="Top" Width="200" DockPanel.Dock="Left" Margin="0,20,0,0" Height="570"/>
-        <DockPanel x:Name="ContentView" Height="580" Width="650" Margin="0,20,0,0"/>
-
+        <ListBox x:Name="CategoryBar" VerticalAlignment="Top" Width="200" DockPanel.Dock="Left" Margin="0,20,0,10" Height="570"/>
+        <ScrollViewer x:Name="ContentView" Height="570" Width="630" Margin="20,20,0,10" Loaded="ContentView_Loaded">
+            <DockPanel x:Name="ContentPanel" Width="570" Height="630" />
+        </ScrollViewer>
     </DockPanel>
 </Window>

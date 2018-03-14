@@ -25,7 +25,12 @@ namespace WinAppClient
         public MainWindow()
         {
             InitializeComponent();
+        }
 
+        private void ContentView_Loaded(object sender, RoutedEventArgs e)
+        {
+            Welcome welcome = new Welcome();
+            ContentPanel.Children.Add(welcome);
         }
     }
 }

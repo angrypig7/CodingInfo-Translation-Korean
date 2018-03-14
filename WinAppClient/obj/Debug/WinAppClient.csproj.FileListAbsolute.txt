@@ -13,3 +13,7 @@ D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.csproj.GenerateResour
 D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.csproj.CoreCompileInputs.cache
 D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.exe
 D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.pdb
+D:\영어 프로젝트\WinAppClient\obj\Debug\WelcomePage.baml
+D:\영어 프로젝트\WinAppClient\obj\Debug\Welcome.g.cs
+D:\영어 프로젝트\WinAppClient\obj\Debug\Welcome.baml
+D:\영어 프로젝트\WinAppClient\obj\Debug\GeneratedInternalTypeHelper.g.cs
