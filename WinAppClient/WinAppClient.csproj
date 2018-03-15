@@ -54,18 +54,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CategoriObj.xaml.cs">
+    <Compile Include="MainWindowHandler.cs" />
+    <Compile Include="uicontrol\CategoriObj.xaml.cs">
       <DependentUpon>CategoriObj.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SearchResult.xaml.cs">
+    <Compile Include="uicontrol\SearchResult.xaml.cs">
       <DependentUpon>SearchResult.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TCPClientHandler.cs" />
-    <Compile Include="TCPProtocol.cs" />
-    <Compile Include="Welcome.xaml.cs">
+    <Compile Include="tcp\TCPClientHandler.cs" />
+    <Compile Include="tcp\TCPProtocol.cs" />
+    <Compile Include="uicontrol\Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
-    <Page Include="CategoriObj.xaml">
+    <Page Include="uicontrol\CategoriObj.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -81,11 +82,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SearchResult.xaml">
+    <Page Include="uicontrol\SearchResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Welcome.xaml">
+    <Page Include="uicontrol\Welcome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="uicontrol\categories.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

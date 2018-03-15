@@ -23,29 +23,38 @@ namespace WinAppClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowHandler windowHandler;
+
         public MainWindow()
         {
             InitializeComponent();
+            windowHandler = new MainWindowHandler();
         }
 
         private void ContentView_Loaded(object sender, RoutedEventArgs e)
         {
-            ContentList.Visibility = Visibility.Hidden;
             ContentPanel.Children.Add(new Welcome());
         }
 
         private void CategoryBar_Loaded(object sender, RoutedEventArgs e)
         {
-            CategoryBar.Items.Add(new CategoriObj("C/C++"));
-            CategoryBar.Items.Add(new CategoriObj("Java"));
-            CategoryBar.Items.Add(new CategoriObj("C#/.Net"));
-            CategoryBar.Items.Add(new CategoriObj("Web"));
+            foreach(var idx in windowHandler.GetCategoriObjs())
+            {
+                CategoryBar.Items.Add(idx);
+            }
         }
 
         private void TB_Search_GotFocus(object sender, RoutedEventArgs e)
         {
             TB_Search.Text = null;
             TB_Search.Foreground = Brushes.Black;
+        }
+
+        private void BT_Search_Submit_Click(object sender, RoutedEventArgs e)
+        {
+            string searchKeyword = TB_Search.Text;
+            //Do something with keyword
+            TB_Search.Text = null;
         }
     }
 }

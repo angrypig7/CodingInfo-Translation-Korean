@@ -23,7 +23,7 @@
             
             <Image x:Name="Logo" Height="100" Margin="0" Width="200"/>
             <TextBox x:Name="TB_Search" Grid.Column="1" Margin="20,0,0,0" TextWrapping="Wrap" Text="Search..." VerticalAlignment="Center" FontSize="24" FontFamily="KoPubDotum Medium" GotFocus="TB_Search_GotFocus" Foreground="#FF888888"/>
-            <Button x:Name="BT_Search_Submit" Content="Go!" Grid.Column="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontFamily="KoPubDotum Medium"/>
+            <Button x:Name="BT_Search_Submit" Content="Go!" Grid.Column="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontFamily="KoPubDotum Medium" Click="BT_Search_Submit_Click"/>
         </Grid>
         
         <ListBox x:Name="CategoryBar" VerticalAlignment="Top" Width="200" DockPanel.Dock="Left" Margin="0,20,0,10" Loaded="CategoryBar_Loaded" HorizontalAlignment="Center" MinWidth="200" MinHeight="570"/>
@@ -31,6 +31,5 @@
             <DockPanel x:Name="ContentPanel" Width="570" Height="630" />
         </ScrollViewer>
 
-        <ListBox x:Name="ContentList" Margin="20,20,0,10" DockPanel.Dock="Bottom" MinWidth="630" MinHeight="570" />
     </DockPanel>
 </Window>
