@@ -30,5 +30,7 @@
         <ScrollViewer x:Name="ContentView" Margin="20,20,0,10" DockPanel.Dock="Bottom" Loaded="ContentView_Loaded" MinWidth="630" MinHeight="570">
             <DockPanel x:Name="ContentPanel" Width="570" Height="630" />
         </ScrollViewer>
+
+        <ListBox x:Name="ContentList" Margin="20,20,0,10" DockPanel.Dock="Bottom" MinWidth="630" MinHeight="570" />
     </DockPanel>
 </Window>

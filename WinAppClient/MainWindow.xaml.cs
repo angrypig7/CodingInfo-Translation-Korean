@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace WinAppClient
 {
@@ -29,8 +30,8 @@ namespace WinAppClient
 
         private void ContentView_Loaded(object sender, RoutedEventArgs e)
         {
-            Welcome welcome = new Welcome();
-            ContentPanel.Children.Add(welcome);
+            ContentList.Visibility = Visibility.Hidden;
+            ContentPanel.Children.Add(new Welcome());
         }
 
         private void CategoryBar_Loaded(object sender, RoutedEventArgs e)
