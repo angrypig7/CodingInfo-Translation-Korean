@@ -19,3 +19,8 @@ D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\Welcome.g.cs
 D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\CategoriObj.baml
 D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\SearchResult.baml
 D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\Welcome.baml
+D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\InfoWindow.g.cs
+D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\InfoWindow.baml
+D:\영어 프로젝트\WinAppClient\bin\Debug\Newtonsoft.Json.dll
+D:\영어 프로젝트\WinAppClient\bin\Debug\Newtonsoft.Json.xml
+D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.csproj.CopyComplete
