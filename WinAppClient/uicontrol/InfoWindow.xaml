@@ -11,6 +11,7 @@
             <TextBox x:Name="TBX_Title" TextWrapping="Wrap" Text="Title" DockPanel.Dock="Top" UndoLimit="98" FontFamily="KoPubDotum Medium" FontSize="48" Margin="0,20,0,0" />
             <TextBox x:Name="TBX_EngName" TextWrapping="Wrap" Text="EngName" DockPanel.Dock="Top" FontSize="32" Foreground="Gray"/>
             <TextBox x:Name="TBX_Author" TextWrapping="Wrap" Text="Author" FontSize="24" DockPanel.Dock="Top" Foreground="#FF888888" FontFamily="KoPubDotum Medium" Margin="0,30,0,0"/>
+            <TextBox x:Name="TBX_Content" TextWrapping="Wrap" Text="Contents" FontSize="24" Margin="0,20,0,0" DockPanel.Dock="Top"/>
 
         </DockPanel>
 
