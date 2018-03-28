@@ -51,5 +51,10 @@ namespace WinAppClient
                 targetPanel.Children.Add(result);
             }
         }
+
+        public void SubmitSearchStringtoServer(string targetString, out List<JObject> jObjectsList)
+        {
+            //TODO: 서버에 submit 한 후 json 리스트 가져오기
+        }
     }
 }

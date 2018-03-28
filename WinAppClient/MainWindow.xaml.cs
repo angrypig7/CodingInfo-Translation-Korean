@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WinAppClient
 {
@@ -53,7 +55,10 @@ namespace WinAppClient
         private void BT_Search_Submit_Click(object sender, RoutedEventArgs e)
         {
             string searchKeyword = TB_Search.Text;
+            var jsonList = new List<JObject>();
             //Do something with keyword
+            windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonList);
+            windowHandler.AddSearchResults(ContentPanel, jsonList);
             TB_Search.Text = null;
         }
     }
