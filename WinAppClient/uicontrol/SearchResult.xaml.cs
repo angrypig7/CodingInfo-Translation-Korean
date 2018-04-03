@@ -21,13 +21,11 @@ namespace WinAppClient
     public partial class SearchResult : UserControl
     {
         string title;
-        string contents;
         string author;
         string date;
         string tags;
 
         public string Title { get => title; set => title = value; }
-        public string Contents { get => contents; set => contents = value; }
         public string Author { get => author; set => author = value; }
         public string Date { get => date; set => date = value; }
         public string Tags { get => tags; set => tags = value; }
@@ -37,10 +35,9 @@ namespace WinAppClient
             InitializeComponent();
         }
 
-        public SearchResult(string title, string content, string author, string date, string tag)
+        public SearchResult(string title, string author, string date, string tag)
         {
             this.title = title;
-            this.contents = content;
             this.author = author;
             this.date = date;
             this.tags = tag;
@@ -48,7 +45,10 @@ namespace WinAppClient
 
         private void MainControl_Loaded(object sender, RoutedEventArgs e)
         {
-
+            TBX_Title.Text = title;
+            TBX_Author.Text = author;
+            TBX_Date.Text = date;
+            TBX_Tag.Text = tags;
         }
     }
 }

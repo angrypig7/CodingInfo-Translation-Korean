@@ -44,7 +44,7 @@ namespace WinAppClient
 
             foreach(var item in jObjectsList)
             {
-                var result = new SearchResult(title: item["title"].ToString(), content: item["content"].ToString(), 
+                var result = new SearchResult(title: item["title"].ToString(),
                     author: item["author"].ToString(), date: item["date"].ToString(), tag: item["tag"].ToString());
 
                 DockPanel.SetDock(result, Dock.Top);
@@ -52,9 +52,11 @@ namespace WinAppClient
             }
         }
 
+        /*
         public void SubmitSearchStringtoServer(string targetString, out List<JObject> jObjectsList)
         {
             //TODO: 서버에 submit 한 후 json 리스트 가져오기
         }
+        */
     }
 }

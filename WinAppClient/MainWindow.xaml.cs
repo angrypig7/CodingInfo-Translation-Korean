@@ -56,8 +56,7 @@ namespace WinAppClient
         {
             string searchKeyword = TB_Search.Text;
             var jsonList = new List<JObject>();
-            //Do something with keyword
-            windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonList);
+            //windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonList);
             windowHandler.AddSearchResults(ContentPanel, jsonList);
             TB_Search.Text = null;
         }
