@@ -38,18 +38,20 @@ namespace WinAppClient
             return resultList;
         }
 
-        public void AddSearchResults(DockPanel targetPanel, List<JObject> jObjectsList)
+        public List<SearchResult> GetSearchResults(List<JObject> jObjectsList)
         {
-            targetPanel.Children.Clear();
+            var result = new List<SearchResult>();
 
             foreach(var item in jObjectsList)
             {
-                var result = new SearchResult(title: item["title"].ToString(),
-                    author: item["author"].ToString(), date: item["date"].ToString(), tag: item["tag"].ToString());
-
-                DockPanel.SetDock(result, Dock.Top);
-                targetPanel.Children.Add(result);
+                string jsonTitle = item["title"].ToString();
+                string jsonAuthor = item["author"].ToString();
+                string jsonDate = item["date"].ToString();
+                string jsonTag = item["tag"].ToString();
+                //TODO: json 파싱 마무리하기
+                result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tag: jsonTag));
             }
+            return result;
         }
 
         /*

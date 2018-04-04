@@ -37,6 +37,7 @@ namespace WinAppClient
 
         public SearchResult(string title, string author, string date, string tag)
         {
+            InitializeComponent();
             this.title = title;
             this.author = author;
             this.date = date;

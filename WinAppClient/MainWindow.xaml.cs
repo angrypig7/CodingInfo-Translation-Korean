@@ -17,6 +17,7 @@ using System.Net.Sockets;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace WinAppClient
 {
@@ -54,11 +55,24 @@ namespace WinAppClient
 
         private void BT_Search_Submit_Click(object sender, RoutedEventArgs e)
         {
-            string searchKeyword = TB_Search.Text;
             var jsonList = new List<JObject>();
-            //windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonList);
-            windowHandler.AddSearchResults(ContentPanel, jsonList);
+
             TB_Search.Text = null;
+            string searchKeyword = TB_Search.Text;
+            //windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonList);
+
+            jsonList.Add(JObject.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample01.json")));
+            jsonList.Add(JObject.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
+            //for test
+
+            ContentPanel.Children.Clear();
+            var searchResult = windowHandler.GetSearchResults(jsonList);
+
+            foreach(var item in searchResult)
+            {
+                DockPanel.SetDock(item, Dock.Top);
+                ContentPanel.Children.Add(item);
+            }
         }
     }
 }
