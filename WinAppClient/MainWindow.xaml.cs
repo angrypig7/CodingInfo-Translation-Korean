@@ -55,24 +55,39 @@ namespace WinAppClient
 
         private void BT_Search_Submit_Click(object sender, RoutedEventArgs e)
         {
-            var jsonList = new List<JObject>();
+            var jsonArray = new JArray();
 
             TB_Search.Text = null;
             string searchKeyword = TB_Search.Text;
-            //windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonList);
-
-            jsonList.Add(JObject.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample01.json")));
-            jsonList.Add(JObject.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
-            //for test
+            //windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonArray);
 
             ContentPanel.Children.Clear();
-            var searchResult = windowHandler.GetSearchResults(jsonList);
-
-            foreach(var item in searchResult)
+            var searchResult = windowHandler.GetSearchResults(JArray.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
+            //for test
+            foreach (var item in searchResult)
             {
                 DockPanel.SetDock(item, Dock.Top);
+                SetSearchResultOutlook(item);
                 ContentPanel.Children.Add(item);
             }
+        }
+
+        private void SetSearchResultOutlook(SearchResult item)
+        {
+            item.MouseDoubleClick += SearchResult_MouseDoubleClick;
+            item.Margin = new Thickness(0, 10, 0, 10);
+            item.BorderBrush = Brushes.Black;
+            item.BorderThickness = new Thickness(2);
+        }
+
+        //private void SearchResult_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    (sender as SearchResult).Foreground = Brushes.Blue;
+        //}
+
+        private void SearchResult_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("Click");
         }
     }
 }

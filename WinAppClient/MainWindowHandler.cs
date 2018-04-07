@@ -27,7 +27,6 @@ namespace WinAppClient
                 if (readVal == null) break;
                 categoriObjs.Add(new CategoriObj(readVal));
             }
-
             return categoriObjs;
         }
 
@@ -38,24 +37,25 @@ namespace WinAppClient
             return resultList;
         }
 
-        public List<SearchResult> GetSearchResults(List<JObject> jObjectsList)
+        public List<SearchResult> GetSearchResults(JArray jObjectArray)
         {
             var result = new List<SearchResult>();
 
-            foreach(var item in jObjectsList)
+            foreach(var item in jObjectArray)
             {
                 string jsonTitle = item["title"].ToString();
                 string jsonAuthor = item["author"].ToString();
                 string jsonDate = item["date"].ToString();
                 string jsonTag = item["tag"].ToString();
+                string jsonUrl = item["url"].ToString();
                 //TODO: json 파싱 마무리하기
-                result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tag: jsonTag));
+                result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink:jsonUrl));
             }
             return result;
         }
 
         /*
-        public void SubmitSearchStringtoServer(string targetString, out List<JObject> jObjectsList)
+        public void SubmitSearchStringtoServer(string targetString, out JArray)
         {
             //TODO: 서버에 submit 한 후 json 리스트 가져오기
         }

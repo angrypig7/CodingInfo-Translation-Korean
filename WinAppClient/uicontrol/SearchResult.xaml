@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:WinAppClient"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="530" Background="White" Width="570" Height="150" Loaded="MainControl_Loaded">
-    <Grid Width="570" Height="150">
+    
+    <Grid x:Name="MainGrid" Width="570" Height="150">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
