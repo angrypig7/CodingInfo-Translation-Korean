@@ -30,13 +30,6 @@ namespace WinAppClient
             return categoriObjs;
         }
 
-        public List<JObject> GetJsonList()
-        {
-            var resultList = new List<JObject>();
-            //TODO: 서버와 통신해서 json 리스트 생성하기
-            return resultList;
-        }
-
         public List<SearchResult> GetSearchResults(JArray jObjectArray)
         {
             var result = new List<SearchResult>();
@@ -48,7 +41,7 @@ namespace WinAppClient
                 string jsonDate = item["date"].ToString();
                 string jsonTag = item["tag"].ToString();
                 string jsonUrl = item["url"].ToString();
-                //TODO: json 파싱 마무리하기
+                //TODO: json tag 파싱 마무리하기
                 result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink:jsonUrl));
             }
             return result;

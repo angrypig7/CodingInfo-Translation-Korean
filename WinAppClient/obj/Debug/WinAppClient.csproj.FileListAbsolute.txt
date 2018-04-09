@@ -24,3 +24,7 @@ D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\InfoWindow.baml
 D:\영어 프로젝트\WinAppClient\bin\Debug\Newtonsoft.Json.dll
 D:\영어 프로젝트\WinAppClient\bin\Debug\Newtonsoft.Json.xml
 D:\영어 프로젝트\WinAppClient\obj\Debug\WinAppClient.csproj.CopyComplete
+D:\영어 프로젝트\WinAppClient\bin\Debug\Markdig.dll
+D:\영어 프로젝트\WinAppClient\bin\Debug\Markdig.xml
+D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\ShowContent.g.cs
+D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\ShowContent.baml

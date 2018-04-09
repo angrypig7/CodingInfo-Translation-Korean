@@ -18,6 +18,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using Markdig;
 
 namespace WinAppClient
 {
@@ -87,7 +88,15 @@ namespace WinAppClient
 
         private void SearchResult_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            //TODO: 마크다운 창 예쁘게 꾸미기
+
             MessageBox.Show("Click");
+            var test = File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample01.md");
+            //for test
+            var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+            var markdownObj = Markdown.ToHtml(test, pipeline);
+            var showContent = new uicontrol.ShowContent(markdownObj);
+            showContent.Show();
         }
     }
 }
