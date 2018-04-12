@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using Markdig;
+using Markdig.SyntaxHighlighting;
 
 namespace WinAppClient
 {
@@ -33,6 +34,16 @@ namespace WinAppClient
         {
             InitializeComponent();
             windowHandler = new MainWindowHandler();
+        }
+
+        private void IMG_Logo_Loaded(object sender, RoutedEventArgs e)
+        {
+            BitmapImage logo = new BitmapImage();
+            logo.BeginInit();
+            logo.UriSource = new Uri(Directory.GetCurrentDirectory() + @"\rsc\logo.jpg");
+            logo.EndInit();
+
+            IMG_Logo.Source = logo;
         }
 
         private void ContentView_Loaded(object sender, RoutedEventArgs e)
@@ -90,7 +101,6 @@ namespace WinAppClient
         {
             //TODO: 마크다운 창 예쁘게 꾸미기
 
-            MessageBox.Show("Click");
             var test = File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample01.md");
             //for test
             var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
@@ -98,5 +108,6 @@ namespace WinAppClient
             var showContent = new uicontrol.ShowContent(markdownObj);
             showContent.Show();
         }
+
     }
 }

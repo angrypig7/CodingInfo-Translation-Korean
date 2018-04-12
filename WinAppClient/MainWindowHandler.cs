@@ -19,7 +19,7 @@ namespace WinAppClient
         public List<CategoriObj> GetCategoriObjs()
         {
             var categoriObjs = new List<CategoriObj>();
-            var reader = new StreamReader(Directory.GetCurrentDirectory() + @"\uicontrol\categories.txt");
+            var reader = new StreamReader(Directory.GetCurrentDirectory() + @"\uicontrol\categories.dat");
 
             for(; ; )
             {
