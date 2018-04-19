@@ -8,6 +8,9 @@
         Title="ShowContent" Height="700" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -16,7 +19,7 @@
             <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
         
-        <WebBrowser x:Name="MarkdownViewer" Margin="20" Loaded="MarkdownViewer_Loaded" />
+        <WebBrowser x:Name="MarkdownViewer" Margin="20" Loaded="MarkdownViewer_Loaded" Grid.RowSpan="4" />
 
     </Grid>
 </Window>

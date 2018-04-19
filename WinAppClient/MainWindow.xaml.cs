@@ -28,12 +28,10 @@ namespace WinAppClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindowHandler windowHandler;
 
         public MainWindow()
         {
             InitializeComponent();
-            windowHandler = new MainWindowHandler();
         }
 
         private void IMG_Logo_Loaded(object sender, RoutedEventArgs e)
@@ -53,10 +51,18 @@ namespace WinAppClient
 
         private void CategoryBar_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach(var idx in windowHandler.GetCategoriObjs())
+            foreach(var item in this.GetCategoriObjs())
             {
-                CategoryBar.Items.Add(idx);
+                item.MouseDoubleClick += CategoriObj_MouseDoubleClick;
+                CategoryBar.Items.Add(item);
             }
+        }
+
+        private void CategoriObj_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var categoryVal = (sender as CategoriObj).CategoryName;
+            //TODO: 카테고리 정보 전송 구현
+            //AddSearchResulttoPanel(searchResult);
         }
 
         private void TB_Search_GotFocus(object sender, RoutedEventArgs e)
@@ -71,26 +77,14 @@ namespace WinAppClient
 
             TB_Search.Text = null;
             string searchKeyword = TB_Search.Text;
-            //windowHandler.SubmitSearchStringtoServer(searchKeyword, out jsonArray);
+            //this.SubmitSearchStringtoServer(searchKeyword, out jsonArray);
 
-            ContentPanel.Children.Clear();
-            var searchResult = windowHandler.GetSearchResults(JArray.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
+            var searchResult = this.GetSearchResults(JArray.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
             //for test
-            foreach (var item in searchResult)
-            {
-                DockPanel.SetDock(item, Dock.Top);
-                SetSearchResultOutlook(item);
-                ContentPanel.Children.Add(item);
-            }
+
+            AddSearchResulttoPanel(searchResult);
         }
 
-        private void SetSearchResultOutlook(SearchResult item)
-        {
-            item.MouseDoubleClick += SearchResult_MouseDoubleClick;
-            item.Margin = new Thickness(0, 10, 0, 10);
-            item.BorderBrush = Brushes.Black;
-            item.BorderThickness = new Thickness(2);
-        }
 
         //private void SearchResult_MouseEnter(object sender, MouseEventArgs e)
         //{
@@ -108,6 +102,5 @@ namespace WinAppClient
             var showContent = new uicontrol.ShowContent(markdownObj);
             showContent.Show();
         }
-
     }
 }
