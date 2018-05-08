@@ -28,10 +28,12 @@ namespace WinAppClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        string URL;
 
         public MainWindow()
         {
             InitializeComponent();
+            URL = WinAppClient.Properties.Settings.Default.WebURL;
         }
 
         private void IMG_Logo_Loaded(object sender, RoutedEventArgs e)
@@ -74,10 +76,10 @@ namespace WinAppClient
         private void BT_Search_Submit_Click(object sender, RoutedEventArgs e)
         {
             var jsonArray = new JArray();
+            string searchKeyword = TB_Search.Text;
 
             TB_Search.Text = null;
-            string searchKeyword = TB_Search.Text;
-            //this.SubmitSearchStringtoServer(searchKeyword, out jsonArray);
+            this.SubmitSearchStringtoServer(searchKeyword, out jsonArray);
 
             var searchResult = this.GetSearchResults(JArray.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
             //for test

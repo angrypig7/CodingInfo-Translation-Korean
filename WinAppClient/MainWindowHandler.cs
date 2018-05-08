@@ -75,13 +75,21 @@ namespace WinAppClient
                 ContentPanel.Children.Add(item);
             }
         }
-
-        /*
-        public void SubmitSearchStringtoServer(string targetString, out JArray)
+        
+        public void SubmitSearchStringtoServer(string targetString, out JArray jArray)
         {
-            //TODO: 서버에 submit 한 후 json 리스트 가져오기
-        }
-        */
+            //지금은 URL이 구글임
+            Uri uri = new Uri(URL + @"?q=" + targetString);
+            WebRequest webRequest = WebRequest.Create(uri);
+            WebResponse webResponse;
+            jArray = new JArray();
+
+            webRequest.Method = "GET";
+            webResponse = webRequest.GetResponse();           
+            Stream responseStream = webResponse.GetResponseStream();
+            StreamReader streamReader = new StreamReader(responseStream);
+            
+        }       
 
         /*
         public void SubmitCategoryStringtoServer(string targetString, out JArray)
