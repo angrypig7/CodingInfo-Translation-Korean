@@ -75,27 +75,46 @@ namespace WinAppClient
                 ContentPanel.Children.Add(item);
             }
         }
-        
+
         public void SubmitSearchStringtoServer(string targetString, out JArray jArray)
         {
-            //지금은 URL이 구글임
-            Uri uri = new Uri(URL + @"?q=" + targetString);
-            WebRequest webRequest = WebRequest.Create(uri);
+            Uri uri = new Uri(URL + @"?key=" + targetString);
+            HttpWebRequest webRequest = HttpWebRequest.CreateHttp(uri);
             WebResponse webResponse;
             jArray = new JArray();
 
             webRequest.Method = "GET";
-            webResponse = webRequest.GetResponse();           
+            webRequest.UserAgent = @"Chrome";
+            webResponse = webRequest.GetResponse();
             Stream responseStream = webResponse.GetResponseStream();
-            StreamReader streamReader = new StreamReader(responseStream);
-            
-        }       
-
-        /*
-        public void SubmitCategoryStringtoServer(string targetString, out JArray)
-        {
-            //TODO: 서버에 submit 한 후 json 리스트 가져오기
+            StreamReader responseStreamReader = new StreamReader(responseStream);
+            StreamReaderTest(responseStreamReader);
         }
-         */
+
+        public void SubmitCategoryStringtoServer(string targetString, out JArray jArray)
+        {
+            Uri uri = new Uri(URL + @"?key=" + targetString);
+            HttpWebRequest webRequest = HttpWebRequest.CreateHttp(uri);
+            WebResponse webResponse;
+            jArray = new JArray();
+
+            webRequest.Method = "GET";
+            webRequest.UserAgent = @"Chrome";
+            webResponse = webRequest.GetResponse();
+            Stream responseStream = webResponse.GetResponseStream();
+            StreamReader responseStreamReader = new StreamReader(responseStream);
+            StreamReaderTest(responseStreamReader);
+        }
+
+
+        private static void StreamReaderTest(StreamReader streamReader)
+        {
+            for (; ; )
+            {
+                var tmp = streamReader.ReadLine();
+                if (tmp == null) break;
+                else Console.WriteLine(tmp);
+            }
+        }
     }
 }

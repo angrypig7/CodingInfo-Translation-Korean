@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Threading;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -29,11 +31,13 @@ namespace WinAppClient
     public partial class MainWindow : Window
     {
         string URL;
+        BackgroundWorker BG_Searcher;
 
         public MainWindow()
         {
             InitializeComponent();
             URL = WinAppClient.Properties.Settings.Default.WebURL;
+            BG_Searcher = new BackgroundWorker();
         }
 
         private void IMG_Logo_Loaded(object sender, RoutedEventArgs e)
@@ -62,7 +66,10 @@ namespace WinAppClient
 
         private void CategoriObj_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var categoryVal = (sender as CategoriObj).CategoryName;
+            var jsonArray = new JArray();
+            string categoryVal = "category ";
+            categoryVal += (sender as CategoriObj).CategoryName;
+            SubmitCategoryStringtoServer(categoryVal, out jsonArray);
             //TODO: 카테고리 정보 전송 구현
             //AddSearchResulttoPanel(searchResult);
         }
@@ -86,12 +93,6 @@ namespace WinAppClient
 
             AddSearchResulttoPanel(searchResult);
         }
-
-
-        //private void SearchResult_MouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    (sender as SearchResult).Foreground = Brushes.Blue;
-        //}
 
         private void SearchResult_MouseDoubleClick(object sender, MouseEventArgs e)
         {

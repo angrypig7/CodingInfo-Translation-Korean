@@ -25,7 +25,7 @@ namespace WinAppClient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://google.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fishsoup.dothome.co.kr/request.php")]
         public string WebURL {
             get {
                 return ((string)(this["WebURL"]));
