@@ -37,7 +37,6 @@ namespace WinAppClient
         {
             InitializeComponent();
             URL = WinAppClient.Properties.Settings.Default.WebURL;
-            BG_Searcher = new BackgroundWorker();
         }
 
         private void IMG_Logo_Loaded(object sender, RoutedEventArgs e)
