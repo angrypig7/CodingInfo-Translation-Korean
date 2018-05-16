@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:WinAppClient"
         xmlns:welcome="clr-namespace:WinAppClient"
         mc:Ignorable="d"
-        Title="MainWindow" Width="900" Height="750" ShowInTaskbar="False" ResizeMode="CanResize" MinHeight="750" MinWidth="900" Background="White">
+        Title="MainWindow" Width="900" Height="750" ShowInTaskbar="False" ResizeMode="CanResize" MinHeight="750" MinWidth="900">
     <DockPanel x:Name="MainPanel" HorizontalAlignment="Center" Height="700" VerticalAlignment="Center" LastChildFill="False" Width="850">
         
-        <Grid x:Name="NavigationBar" DockPanel.Dock="Top" VerticalAlignment="Top" MinHeight="100" Background="#4CFFFFFF">
+        <Grid x:Name="NavigationBar" DockPanel.Dock="Top" VerticalAlignment="Top" MinHeight="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="1.5*" />
@@ -21,13 +21,13 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             
-            <Image x:Name="IMG_Logo" Height="100" Margin="0" Width="200" VerticalAlignment="Top" Loaded="IMG_Logo_Loaded"/>
+            <Image x:Name="Logo" Height="100" Margin="0" Width="200"/>
             <TextBox x:Name="TB_Search" Grid.Column="1" Margin="20,0,0,0" TextWrapping="Wrap" Text="Search..." VerticalAlignment="Center" FontSize="24" FontFamily="KoPubDotum Medium" GotFocus="TB_Search_GotFocus" Foreground="#FF888888"/>
             <Button x:Name="BT_Search_Submit" Content="Go!" Grid.Column="2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" FontFamily="KoPubDotum Medium" Click="BT_Search_Submit_Click"/>
         </Grid>
         
-        <ListBox x:Name="CategoryBar" VerticalAlignment="Top" Width="200" DockPanel.Dock="Left" Margin="0,20,0,10" Loaded="CategoryBar_Loaded" HorizontalAlignment="Center" MinWidth="200" MinHeight="570" Background="#3FFFFFFF"/>
-        <ScrollViewer x:Name="ContentView" Margin="20,20,0,10" DockPanel.Dock="Bottom" Loaded="ContentView_Loaded" MinWidth="630" MinHeight="570" Background="#3FFFFFFF">
+        <ListBox x:Name="CategoryBar" VerticalAlignment="Top" Width="200" DockPanel.Dock="Left" Margin="0,20,0,10" Loaded="CategoryBar_Loaded" HorizontalAlignment="Center" MinWidth="200" MinHeight="570"/>
+        <ScrollViewer x:Name="ContentView" Margin="20,20,0,10" DockPanel.Dock="Bottom" Loaded="ContentView_Loaded" MinWidth="630" MinHeight="570">
             <DockPanel x:Name="ContentPanel" Width="570" Height="630" />
         </ScrollViewer>
 
