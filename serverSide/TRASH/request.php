@@ -31,6 +31,8 @@ if(isset($_GET['key'])){
     $req = $_GET['key'];
 }
 
+echo"request = $req </br></br>";
+
 $SQL = "SELECT * FROM fish_data WHERE idx = '$req'";
 $result_set = mysqli_query($conn, $SQL);
 $result = mysqli_fetch_assoc($result_set);
@@ -44,28 +46,18 @@ $data_views = $result['views'];
 $data_sugg = $result['sugg'];
 $data_date = $result['date'];
 
-// echo"idx = $data_idx </br>";
-// echo"title = $data_title </br>";
-// echo"head = $data_head </br>";
-// echo"body = $data_body </br>";
-// echo"comment = $data_comment </br>";
-// echo"views = $data_views </br>";
-// echo"sugg = $data_sugg </br>";
-// echo"date = $data_date </br></br>";
+echo"idx = $data_idx </br>";
+echo"title = $data_title </br>";
+echo"head = $data_head </br>";
+echo"body = $data_body </br>";
+echo"comment = $data_comment </br>";
+echo"views = $data_views </br>";
+echo"sugg = $data_sugg </br>";
+echo"date = $data_date </br>";
 
 
 $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head, 'body'=>$data_body, 'comment'=>$data_comment,
     'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
-$str = json_encode($data, JSON_PRETTY_PRINT);
-
-// $arrdata = array($str, $str, $str);
-// $arrdata = print_r($arrdata, TRUE);
-// str_replace("\\", "", $arrdata);
-
-$arrdata = "[" . $str . ", " . $str . ", " . $str . "]";
-// $json_data = json_encode($arrdata, JSON_PRETTY_PRINT);
-
-// echo"request = $req </br></br>";
-// echo"</br></br>$str</br></br>";
-echo"$arrdata</br>";
+$json_sdata = json_encode($data, JSON_PRETTY_PRINT);
+echo "</br> JSON = </br>$json_sdata </br>";
 ?>
