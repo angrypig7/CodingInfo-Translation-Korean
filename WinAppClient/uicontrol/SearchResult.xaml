@@ -5,24 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WinAppClient"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="530" Background="White" Width="530" Height="200" Loaded="MainControl_Loaded">
-    <Grid Width="530" Height="200">
+             d:DesignHeight="200" d:DesignWidth="530" Background="White" Width="570" Height="150" Loaded="MainControl_Loaded">
+    
+    <Grid x:Name="MainGrid" Width="570" Height="150">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="TBX_Title" BorderThickness="0" Margin="20,10" TextWrapping="Wrap" Text="Title" FontSize="40" FontFamily="KoPubDotum Bold"/>
-        <TextBox x:Name="TBX_Content" BorderThickness="0" Margin="20,10" TextWrapping="Wrap" Text="Content" FontSize="20" FontFamily="KoPubDotum Medium" Grid.Row="1" Background="White" Foreground="#FF888888" Grid.RowSpan="2"/>
+        <TextBox x:Name="TBX_Title" BorderThickness="0" Margin="20,10" TextWrapping="WrapWithOverflow" Text="Title" FontSize="25" FontFamily="KoPubDotum Bold" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
 
-        <TextBox x:Name="TBX_Author" BorderThickness="0" Margin="20,10" TextWrapping="Wrap" Text="Author" FontSize="20" FontFamily="KoPubDotum Medium" Grid.Column="1" Foreground="#FF606060"/>
-        <TextBox x:Name="TBX_Date" BorderThickness="0" Margin="20,10" TextWrapping="Wrap" Text="Date" FontSize="20" FontFamily="KoPubDotum Medium" Grid.Column="1" Foreground="#FF606060" Grid.Row="1"/>
-        <TextBox x:Name="TBX_Tag" BorderThickness="0" Margin="20,10" TextWrapping="Wrap" Text="Tag" FontSize="20" FontFamily="KoPubDotum Medium" Grid.Column="1" Foreground="#FF606060" Grid.Row="2"/>
+        <TextBox x:Name="TBX_Author" BorderThickness="0" Margin="20,10" TextWrapping="NoWrap" Text="Author" FontSize="15" FontFamily="KoPubDotum Medium" Grid.Column="2" Foreground="#FF606060"/>
+        <TextBox x:Name="TBX_Date" BorderThickness="0" Margin="20,10" TextWrapping="NoWrap" Text="Date" FontSize="15" FontFamily="KoPubDotum Medium" Foreground="#FF606060" Grid.Row="1" Grid.Column="2"/>
+        <TextBox x:Name="TBX_Tag" BorderThickness="0" Margin="20,10" TextWrapping="NoWrap" Text="Tag" FontSize="15" FontFamily="KoPubDotum Medium" Grid.Column="2" Foreground="#FF606060" Grid.Row="2"/>
 
     </Grid>
 </UserControl>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿WinAppClient
 
 
@@ -18,3 +19,25 @@ uicontrol\CategoriObj.xaml;MainWindow.xaml;uicontrol\InfoWindow.xaml;uicontrol\S
 
 True
 
+=======
+﻿WinAppClient
+
+
+winexe
+C#
+.cs
+D:\영어 프로젝트\WinAppClient\obj\Debug\
+WinAppClient
+none
+false
+DEBUG;TRACE
+D:\영어 프로젝트\WinAppClient\App.xaml
+668600106
+
+17-60610431
+71-1503746570
+uicontrol\CategoriObj.xaml;MainWindow.xaml;uicontrol\InfoWindow.xaml;uicontrol\SearchResult.xaml;uicontrol\ShowContent.xaml;uicontrol\Welcome.xaml;
+
+True
+
+>>>>>>> 2d8bc8f21be54ead0196e2c28ffb213e3d3eed61
