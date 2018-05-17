@@ -20,24 +20,26 @@ namespace WinAppClient
     /// </summary>
     public partial class CategoriObj : UserControl
     {
-        String name;
+        private string categoryName;
+        public string CategoryName { get => categoryName; }
 
         public CategoriObj()
         {
             InitializeComponent();
-            name = "Name";
+            categoryName = "Name";
         }
 
         public CategoriObj(String ObjName)
         {
             InitializeComponent();
 
-            name = ObjName;
+            categoryName = ObjName;
         }
+
 
         private void LB_Name_Loaded(object sender, RoutedEventArgs e)
         {
-            LB_Name.Content = name;
+            LB_Name.Content = categoryName;
         }
     }
 }

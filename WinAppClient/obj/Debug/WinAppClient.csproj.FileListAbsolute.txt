@@ -50,3 +50,7 @@ D:\영어 프로젝트\CodingInfo-Translation-Korean\WinAppClient\obj\Debug\WinA
 D:\영어 프로젝트\CodingInfo-Translation-Korean\WinAppClient\obj\Debug\WinAppClient.csproj.CopyComplete
 D:\영어 프로젝트\CodingInfo-Translation-Korean\WinAppClient\obj\Debug\WinAppClient.exe
 D:\영어 프로젝트\CodingInfo-Translation-Korean\WinAppClient\obj\Debug\WinAppClient.pdb
+D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\ShowContent.g.cs
+D:\영어 프로젝트\WinAppClient\bin\Debug\Markdig.dll
+D:\영어 프로젝트\WinAppClient\bin\Debug\Markdig.xml
+D:\영어 프로젝트\WinAppClient\obj\Debug\uicontrol\ShowContent.baml

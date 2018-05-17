@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\영어 프로젝트\CodingInfo-Translation-Korean\WinAppClient\obj\Debug\
+D:\영어 프로젝트\WinAppClient\obj\Debug\
 WinAppClient
 none
 false
 DEBUG;TRACE
-D:\영어 프로젝트\CodingInfo-Translation-Korean\WinAppClient\App.xaml
-5-1477270443
+D:\영어 프로젝트\WinAppClient\App.xaml
+668600106
 
-1264010537
-141770759880
-uicontrol\CategoriObj.xaml;MainWindow.xaml;uicontrol\InfoWindow.xaml;uicontrol\SearchResult.xaml;uicontrol\Welcome.xaml;
+131619010693
+151478013311
+uicontrol\CategoriObj.xaml;MainWindow.xaml;uicontrol\InfoWindow.xaml;uicontrol\SearchResult.xaml;uicontrol\ShowContent.xaml;uicontrol\Welcome.xaml;
 
 False
 
