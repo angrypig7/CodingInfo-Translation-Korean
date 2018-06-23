@@ -21,7 +21,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using Markdig;
-using Markdig.SyntaxHighlighting;
 
 namespace WinAppClient
 {
@@ -37,6 +36,7 @@ namespace WinAppClient
         {
             InitializeComponent();
             URL = WinAppClient.Properties.Settings.Default.WebURL;
+            BG_Searcher = new BackgroundWorker();
         }
 
         private void IMG_Logo_Loaded(object sender, RoutedEventArgs e)
@@ -56,7 +56,7 @@ namespace WinAppClient
 
         private void CategoryBar_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach(var item in this.GetCategoriObjs())
+            foreach (var item in this.GetCategoriObjs())
             {
                 item.MouseDoubleClick += CategoriObj_MouseDoubleClick;
                 CategoryBar.Items.Add(item);

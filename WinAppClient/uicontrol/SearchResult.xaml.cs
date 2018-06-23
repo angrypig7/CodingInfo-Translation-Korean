@@ -37,7 +37,7 @@ namespace WinAppClient
             InitializeComponent();
         }
 
-        public SearchResult(string title, string author, string date, string tags ,string markdownDocLink)
+        public SearchResult(string title, string author, string date, string tags, string markdownDocLink)
         {
             InitializeComponent();
             this.title = title;

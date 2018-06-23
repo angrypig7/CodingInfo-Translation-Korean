@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-﻿WinAppClient
-
-
-winexe
-C#
-.cs
-D:\영어 프로젝트\WinAppClient\obj\Debug\
-WinAppClient
-none
-false
-DEBUG;TRACE
-D:\영어 프로젝트\WinAppClient\App.xaml
-5-1477270443
-
-1264010537
-141471879875
-uicontrol\CategoriObj.xaml;MainWindow.xaml;uicontrol\InfoWindow.xaml;uicontrol\SearchResult.xaml;uicontrol\Welcome.xaml;
-
-False
-
-=======
 ﻿WinAppClient
 
 
@@ -34,10 +12,9 @@ DEBUG;TRACE
 D:\영어 프로젝트\WinAppClient\App.xaml
 668600106
 
-17-60610431
-71-1503746570
+131619010693
+151478013311
 uicontrol\CategoriObj.xaml;MainWindow.xaml;uicontrol\InfoWindow.xaml;uicontrol\SearchResult.xaml;uicontrol\ShowContent.xaml;uicontrol\Welcome.xaml;
 
-True
+False
 
->>>>>>> 2d8bc8f21be54ead0196e2c28ffb213e3d3eed61
