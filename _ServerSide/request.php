@@ -42,11 +42,11 @@ if(isset($_GET['idx'])){
 
 $key = "";
 if(isset($_GET['key'])){
-    $key = (string)$_GET['key'];
+    $key = addslashes((string)$_GET['key']);
 }
 
 if(isset($_GET['idx'])){ //INDEX로 검색
-    $SQL = "SELECT * FROM fish_data WHERE idx = '$idx'";
+    $SQL = "SELECT idx FROM fish_data WHERE idx = '$idx'";
     $result_set = mysqli_query($conn, $SQL);
     $result = mysqli_fetch_assoc($result_set);
 
@@ -80,9 +80,15 @@ if(isset($_GET['key'])){ //문자열로 검색
     $strnum = mysqli_num_rows($search_set);
     $search = mysqli_fetch_array($search_set);
 
+    echo"<br>";
+    print_r($search);
+    echo"<br><br>";
+
     $result[$strnum][8] = "0";
     for($i = 0; $i<$strnum; $i++){
         echo"[$i] data : ".$search[$i]."<br>";
+        echo"gettype[$i] : ".gettype($search[$i])."<br>";
+        echo"isset[$i] : ".isset($search[$i])."<br>";
 
         $sidx = $search[$i];
         $SQL = "SELECT * FROM fish_data WHERE idx='$sidx'";
