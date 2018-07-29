@@ -31,6 +31,15 @@ if(isset($_GET['idx'])&&isset($_GET['key'])){
     die("INVALID REQUEST FORMAT");
 }
 
+$debug = 0;
+if(isset($_GET['debug'])){
+    $debug = (int)$_GET['debug'];
+
+    if( !(($debug==0) || ($debug==1)) ){
+        die("INVALID REQUEST FORMAT");
+    }
+}
+
 $idx = -1;
 if(isset($_GET['idx'])){
     $idx = (int)$_GET['idx'];
@@ -78,17 +87,27 @@ if(isset($_GET['key'])){ //문자열로 검색
     $SQL = "SELECT idx FROM fish_data WHERE title LIKE '%$key%'";
     $search_set = mysqli_query($conn, $SQL);
     $strnum = mysqli_num_rows($search_set);
-    $search = mysqli_fetch_array($search_set);
+    $search[$strnum] = 0;
 
-    echo"<br>";
-    print_r($search);
-    echo"<br><br>";
+    for($i = 0; $i<$strnum; $i++){
+        $tmp = mysqli_fetch_array($search_set);
+        $search[$i] = $tmp['idx'];
+    }
+
+    if($debug){
+        echo"<br>";
+        print_r($search);
+        echo"<br><br>";
+    }
 
     $result[$strnum][8] = "0";
     for($i = 0; $i<$strnum; $i++){
-        echo"[$i] data : ".$search[$i]."<br>";
-        echo"gettype[$i] : ".gettype($search[$i])."<br>";
-        echo"isset[$i] : ".isset($search[$i])."<br>";
+        if($debug){
+            echo"[$i] data : ".$search[$i]."<br>";
+            echo"gettype[$i] : ".gettype($search[$i])."<br>";
+            echo"isset[$i] : ".isset($search[$i])."<br>";
+            echo"<br>";
+        }
 
         $sidx = $search[$i];
         $SQL = "SELECT * FROM fish_data WHERE idx='$sidx'";
@@ -104,14 +123,17 @@ if(isset($_GET['key'])){ //문자열로 검색
         $result[$i][6] = $row['sugg'];
         $result[$i][7] = $row['date'];
 
-        echo"result[$i][0] idx : ".$result[$i][0]."<br>";
-        echo"result[$i][1] title : ".$result[$i][1]."<br>";
-        echo"result[$i][2] head : ".$result[$i][2]."<br>";
-        echo"result[$i][3] body : ".$result[$i][3]."<br>";
-        echo"result[$i][4] comment : ".$result[$i][4]."<br>";
-        echo"result[$i][5] views : ".$result[$i][5]."<br>";
-        echo"result[$i][6] sugg : ".$result[$i][6]."<br>";
-        echo"result[$i][7] date : ".$result[$i][7]."<br>";
+        if($debug){
+            echo"result[$i][0] idx : ".$result[$i][0]."<br>";
+            echo"result[$i][1] title : ".$result[$i][1]."<br>";
+            echo"result[$i][2] head : ".$result[$i][2]."<br>";
+            echo"result[$i][3] body : ".$result[$i][3]."<br>";
+            echo"result[$i][4] comment : ".$result[$i][4]."<br>";
+            echo"result[$i][5] views : ".$result[$i][5]."<br>";
+            echo"result[$i][6] sugg : ".$result[$i][6]."<br>";
+            echo"result[$i][7] date : ".$result[$i][7]."<br>";
+            echo"===================<br><br>";
+        }
     }
 
     // $data_idx = $result['idx'];
@@ -128,13 +150,17 @@ if(isset($_GET['key'])){ //문자열로 검색
 if($strnum <= 0){
     die("NO SEARCH RESULTS");
 }
+if($debug){
+    echo"<br>";
+    echo"<br>idx = $idx </br>";
+    echo"key = $key </br>";
+    echo"strnum = $strnum </br>";
+    echo"<br>===========================================<br><br>";
+}
 
-echo"<br>";
-echo"<br>idx = $idx </br>";
-echo"key = $key </br>";
-echo"strnum = $strnum </br>";
-echo"<br>===========================================<br><br>";
-
+if(!$debug){
+    header('Content-Type: application/json;');
+}
 echo"$JSON";
 
 // echo"title = $data_title </br>";
