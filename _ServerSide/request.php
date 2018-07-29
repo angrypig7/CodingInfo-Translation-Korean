@@ -27,6 +27,10 @@ function get_client_ip() {
 $publicip = get_client_ip();
 $curtime = (new DateTime())->format("Y-m-d H:i:s");
 
+if(isset($_GET['idx'])&&isset($_GET['key'])){
+    die("INVALID REQUEST FORMAT");
+}
+
 $idx = -1;
 if(isset($_GET['idx'])){
     $idx = (int)$_GET['idx'];
@@ -34,100 +38,105 @@ if(isset($_GET['idx'])){
     if($idx <= 0){
         die("INVALID REQUEST FORMAT");
     }
-    else{
-    }
 }
+
 $key = "";
 if(isset($_GET['key'])){
     $key = (string)$_GET['key'];
 }
 
-if(($idx==-1&&strcmp($key, "")==0) || ($idx<>-1&&strcmp($key, "")!=0)){
-    die("INVALID REQUEST FORMAT");
-}
-$strnum = 0;
-
-
-
-
-
-if($idx != -1){
-    $strnum = 1;
-
+if(isset($_GET['idx'])){ //INDEX로 검색
     $SQL = "SELECT * FROM fish_data WHERE idx = '$idx'";
     $result_set = mysqli_query($conn, $SQL);
     $result = mysqli_fetch_assoc($result_set);
 
     $data_idx = $result['idx'];
-    $data_title = $result['title'];
-    $data_head = $result['head'];
-    $data_body = $result['body'];
-    $data_comment = $result['comment'];
-    $data_views = $result['views'];
-    $data_sugg = $result['sugg'];
-    $data_date = $result['date'];
 
-    $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head, 'body'=>$data_body, 'comment'=>$data_comment,'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
+    if( strcmp(gettype($result['idx']), "NULL") ){
+        $strnum = 1;
 
-    $str[$strnum] = "";
-    $str[0] = json_encode($data, JSON_PRETTY_PRINT);
-}
+        $data_title = $result['title'];
+        $data_head = $result['head'];
+        $data_body = $result['body'];
+        $data_comment = $result['comment'];
+        $data_views = $result['views'];
+        $data_sugg = $result['sugg'];
+        $data_date = $result['date'];
 
-if(strcmp($key, "")!=0){
-    $SQL = "SELECT idx FROM fish_data WHERE title LIKE '%$key%'";
-    $result_set = mysqli_query($conn, $SQL);
-    $result = mysqli_fetch_assoc($result_set);
+        $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head,
+        'body'=>$data_body,'comment'=>$data_comment,'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
 
-    $data_idx = $result['idx'];
-    $data_title = $result['title'];
-    $data_head = $result['head'];
-    $data_body = $result['body'];
-    $data_comment = $result['comment'];
-    $data_views = $result['views'];
-    $data_sugg = $result['sugg'];
-    $data_date = $result['date'];
-
-    $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head, 'body'=>$data_body, 'comment'=>$data_comment, 'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
-
-    $str[0] = json_encode($data, JSON_PRETTY_PRINT);
-    $str[1] = json_encode($data, JSON_PRETTY_PRINT);
-    $str[2] = json_encode($data, JSON_PRETTY_PRINT);
-}
-
-$finstr = "";
-// $finstr = 
-foreach($str as $j){
-    if($j>$strnum){
-        $strnum++;
+        $JSON = json_encode($data, JSON_PRETTY_PRINT);
+    }else{
+        $strnum = 0;
     }
-    echo"<br>j:<br>";
 }
 
-// idx, key변수로 GET으로 받음
-// key오 받았을때 multiple row의 결과의 IDX값을 저장했다가 다시 조회해서 최종결고를 넘겨주도록 해야함
+if(isset($_GET['key'])){ //문자열로 검색
+    $strnum = 0;
 
+    $SQL = "SELECT idx FROM fish_data WHERE title LIKE '%$key%'";
+    $search_set = mysqli_query($conn, $SQL);
+    $strnum = mysqli_num_rows($search_set);
+    $search = mysqli_fetch_array($search_set);
 
-echo"<br>===========================================<br>";
-$test1 = $str[1];
-echo"123$test1";
-echo"<br>===========================================<br>";
+    $result[$strnum][8] = "0";
+    for($i = 0; $i<$strnum; $i++){
+        echo"[$i] data : ".$search[$i]."<br>";
 
-// $arrdata = array($str, $str, $str);
-// $arrdata = print_r($arrdata, TRUE);
-// str_replace("\\", "", $arrdata);
+        $sidx = $search[$i];
+        $SQL = "SELECT * FROM fish_data WHERE idx='$sidx'";
+        $row_set = mysqli_query($conn, $SQL);
+        $row = mysqli_fetch_assoc($row_set);
 
-$arrdata = "[" . $str[0] . ", " . $str[0] . ", " . $str[0] . "]";
-// $json_data = json_encode($arrdata, JSON_PRETTY_PRINT);
+        $result[$i][0] = $row['idx'];
+        $result[$i][1] = $row['title'];
+        $result[$i][2] = $row['head'];
+        $result[$i][3] = $row['body'];
+        $result[$i][4] = $row['comment'];
+        $result[$i][5] = $row['views'];
+        $result[$i][6] = $row['sugg'];
+        $result[$i][7] = $row['date'];
 
-echo"$arrdata</br>";
+        echo"result[$i][0] idx : ".$result[$i][0]."<br>";
+        echo"result[$i][1] title : ".$result[$i][1]."<br>";
+        echo"result[$i][2] head : ".$result[$i][2]."<br>";
+        echo"result[$i][3] body : ".$result[$i][3]."<br>";
+        echo"result[$i][4] comment : ".$result[$i][4]."<br>";
+        echo"result[$i][5] views : ".$result[$i][5]."<br>";
+        echo"result[$i][6] sugg : ".$result[$i][6]."<br>";
+        echo"result[$i][7] date : ".$result[$i][7]."<br>";
+    }
 
+    // $data_idx = $result['idx'];
+    // $data_title = $result['title'];
+    // $data_head = $result['head'];
+    // $data_body = $result['body'];
+    // $data_comment = $result['comment'];
+    // $data_views = $result['views'];
+    // $data_sugg = $result['sugg'];
+    // $data_date = $result['date'];
+    $JSON = json_encode($result, JSON_PRETTY_PRINT);
+}
+
+if($strnum <= 0){
+    die("NO SEARCH RESULTS");
+}
+
+echo"<br>";
 echo"<br>idx = $idx </br>";
 echo"key = $key </br>";
-echo"title = $data_title </br>";
-echo"head = $data_head </br>";
-echo"body = $data_body </br>";
-echo"comment = $data_comment </br>";
-echo"views = $data_views </br>";
-echo"sugg = $data_sugg </br>";
-echo"date = $data_date </br></br>";
+echo"strnum = $strnum </br>";
+echo"<br>===========================================<br><br>";
+
+echo"$JSON";
+
+// echo"title = $data_title </br>";
+// echo"head = $data_head </br>";
+// echo"body = $data_body </br>";
+// echo"comment = $data_comment </br>";
+// echo"views = $data_views </br>";
+// echo"sugg = $data_sugg </br>";
+// echo"date = $data_date </br></br>";
+
 ?>
