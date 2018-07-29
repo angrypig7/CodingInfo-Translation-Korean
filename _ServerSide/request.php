@@ -29,21 +29,24 @@ $curtime = (new DateTime())->format("Y-m-d H:i:s");
 
 $idx = -1;
 if(isset($_GET['idx'])){
-    $idx = $_GET['idx'];
+    $idx = (int)$_GET['idx'];
 
-    if($idx <= -1){
+    if($idx <= 0){
         die("INVALID REQUEST FORMAT");
+    }
+    else{
     }
 }
 $key = "";
 if(isset($_GET['key'])){
-    $key = $_GET['key'];
+    $key = (string)$_GET['key'];
 }
 
 if(($idx==-1&&strcmp($key, "")==0) || ($idx<>-1&&strcmp($key, "")!=0)){
     die("INVALID REQUEST FORMAT");
 }
 $strnum = 0;
+
 
 
 
@@ -65,7 +68,7 @@ if($idx != -1){
     $data_date = $result['date'];
 
     $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head, 'body'=>$data_body, 'comment'=>$data_comment,'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
-    
+
     $str[$strnum] = "";
     $str[0] = json_encode($data, JSON_PRETTY_PRINT);
 }
@@ -105,9 +108,9 @@ foreach($str as $j){
 
 
 echo"<br>===========================================<br>";
-$asdf = $qwer[1];
-echo"$asdf";
-echo"<br>===========================================<br>"; 
+$test1 = $str[1];
+echo"123$test1";
+echo"<br>===========================================<br>";
 
 // $arrdata = array($str, $str, $str);
 // $arrdata = print_r($arrdata, TRUE);
