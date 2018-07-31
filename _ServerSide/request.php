@@ -52,6 +52,10 @@ if(isset($_GET['idx'])){
 $key = "";
 if(isset($_GET['key'])){
     $key = addslashes((string)$_GET['key']);
+
+    if(!strcmp($key, "")){
+        die("INVALID REQUEST FORMAT");
+    }
 }
 
 if(isset($_GET['idx'])){ //INDEX로 검색
@@ -96,18 +100,12 @@ if(isset($_GET['key'])){ //문자열로 검색
 
     if($debug){
         echo"<br>";
-        print_r($search);
+        print_r($search_set);
         echo"<br><br>";
     }
 
     $result[$strnum][8] = "0";
     for($i = 0; $i<$strnum; $i++){
-        if($debug){
-            echo"[$i] data : ".$search[$i]."<br>";
-            echo"gettype[$i] : ".gettype($search[$i])."<br>";
-            echo"isset[$i] : ".isset($search[$i])."<br>";
-            echo"<br>";
-        }
 
         $sidx = $search[$i];
         $SQL = "SELECT * FROM fish_data WHERE idx='$sidx'";
@@ -136,39 +134,28 @@ if(isset($_GET['key'])){ //문자열로 검색
         }
     }
 
-    // $data_idx = $result['idx'];
-    // $data_title = $result['title'];
-    // $data_head = $result['head'];
-    // $data_body = $result['body'];
-    // $data_comment = $result['comment'];
-    // $data_views = $result['views'];
-    // $data_sugg = $result['sugg'];
-    // $data_date = $result['date'];
     $JSON = json_encode($result, JSON_PRETTY_PRINT);
 }
 
-if($strnum <= 0){
-    die("NO SEARCH RESULTS");
-}
 if($debug){
     echo"<br>";
     echo"<br>idx = $idx </br>";
     echo"key = $key </br>";
     echo"strnum = $strnum </br>";
     echo"<br>===========================================<br><br>";
+    print_r($result);
 }
 
 if(!$debug){
     header('Content-Type: application/json;');
 }
-echo"$JSON";
 
-// echo"title = $data_title </br>";
-// echo"head = $data_head </br>";
-// echo"body = $data_body </br>";
-// echo"comment = $data_comment </br>";
-// echo"views = $data_views </br>";
-// echo"sugg = $data_sugg </br>";
-// echo"date = $data_date </br></br>";
+if($strnum <= 0){
+    $result = array("NO SEARCH RESULTS");
+    $JSON = json_encode($result, JSON_PRETTY_PRINT);
+    // die("NO SEARCH RESULTS");
+}
+
+print($JSON);
 
 ?>
