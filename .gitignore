@@ -5,4 +5,6 @@
 /WinAppClient/WelcomePage.xaml
 /WinAppClient/WelcomePage.xaml.cs
 /acc.txt
-
+/.idea/
+/.vscode
+/_ServerSide/.idea/
