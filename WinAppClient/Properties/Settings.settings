@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="WebURL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://fishsoup.dothome.co.kr/request.php</Value>
+      <Value Profile="(Default)">http://fishsoup.dothome.co.kr/request.php?debug=1&amp;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

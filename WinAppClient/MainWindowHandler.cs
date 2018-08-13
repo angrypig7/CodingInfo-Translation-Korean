@@ -77,7 +77,8 @@ namespace WinAppClient
 
         public void SubmitSearchStringtoServer(string targetString, out JArray jArray)
         {
-            Uri uri = new Uri(URL + @"?key=" + targetString);
+            Uri uri = new Uri(URL + @"key=" + targetString);
+            Console.WriteLine(uri.ToString());
             HttpWebRequest webRequest = HttpWebRequest.CreateHttp(uri);
             WebResponse webResponse;
             jArray = new JArray();
@@ -87,12 +88,12 @@ namespace WinAppClient
             webResponse = webRequest.GetResponse();
             Stream responseStream = webResponse.GetResponseStream();
             StreamReader responseStreamReader = new StreamReader(responseStream);
-            StreamReaderTest(responseStreamReader);
+            StreamReaderTest(responseStreamReader); //for test
         }
 
         public void SubmitCategoryStringtoServer(string targetString, out JArray jArray)
         {
-            Uri uri = new Uri(URL + @"?key=" + targetString);
+            Uri uri = new Uri(URL + @"key=" + targetString);
             HttpWebRequest webRequest = HttpWebRequest.CreateHttp(uri);
             WebResponse webResponse;
             jArray = new JArray();
