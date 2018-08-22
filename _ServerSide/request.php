@@ -1,4 +1,7 @@
 <?php
+// 1. key로 검색시 index값만 리턴하도록
+// 2. idx로 검색시 마크다운 전체를 리턴하도록
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -59,7 +62,7 @@ if(isset($_GET['key'])){
 }
 
 if(isset($_GET['idx'])){ //INDEX로 검색
-    $SQL = "SELECT idx FROM fish_data WHERE idx = '$idx'";
+    $SQL = "SELECT * FROM fish_data WHERE idx = '$idx'";
     $result_set = mysqli_query($conn, $SQL);
     $result = mysqli_fetch_assoc($result_set);
 
