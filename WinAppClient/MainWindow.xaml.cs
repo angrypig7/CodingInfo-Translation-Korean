@@ -87,8 +87,10 @@ namespace WinAppClient
             TB_Search.Text = null;
             this.SubmitSearchStringtoServer(searchKeyword, out jsonArray);
 
-            var searchResult = this.GetSearchResults(JArray.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
+            //var searchResult = this.GetSearchResults(JArray.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
             //for test
+
+            var searchResult = this.GetSearchResults(jsonArray);
 
             AddSearchResulttoPanel(searchResult);
         }
