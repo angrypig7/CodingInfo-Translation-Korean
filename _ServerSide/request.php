@@ -1,5 +1,5 @@
 <?php
-// 1. key로 검색시 index값만 리턴하도록
+// 1. key로 검색시 프리뷰를
 // 2. idx로 검색시 마크다운 전체를 리턴하도록
 
 ini_set('display_errors', 1);
@@ -61,6 +61,8 @@ if(isset($_GET['key'])){
     }
 }
 
+$JSON = "";
+
 if(isset($_GET['idx'])){ //INDEX로 검색
     $SQL = "SELECT * FROM fish_data WHERE idx = '$idx'";
     $result_set = mysqli_query($conn, $SQL);
@@ -73,18 +75,27 @@ if(isset($_GET['idx'])){ //INDEX로 검색
 
         $data_title = $result['title'];
         $data_head = $result['head'];
+        $data_preview = $result['preview'];
         $data_body = $result['body'];
         $data_comment = $result['comment'];
         $data_views = $result['views'];
         $data_sugg = $result['sugg'];
         $data_date = $result['date'];
 
-        $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head,
-        'body'=>$data_body,'comment'=>$data_comment,'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
+        // $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head, 'preview'=>$data_preview,
+        // 'body'=>$data_body,'comment'=>$data_comment,'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
 
-        $JSON = json_encode($data, JSON_PRETTY_PRINT);
+        // $JSON = json_encode($data, JSON_PRETTY_PRINT);
+
+        $JSON = $data_body;
     }else{
         $strnum = 0;
+    }
+
+    if($strnum <= 0){
+        global $JSON;
+        $JSON = "NO SEARCH RESULTS";
+        // die("NO SEARCH RESULTS");
     }
 }
 
@@ -95,6 +106,12 @@ if(isset($_GET['key'])){ //문자열로 검색
     $search_set = mysqli_query($conn, $SQL);
     $strnum = mysqli_num_rows($search_set);
     $search[$strnum] = 0;
+
+    if($strnum <= 0){
+        global $JSON;
+        $JSON = "NO SEARCH RESULTS";
+        // die("NO SEARCH RESULTS");
+    }
 
     for($i = 0; $i<$strnum; $i++){
         $tmp = mysqli_fetch_array($search_set);
@@ -107,7 +124,6 @@ if(isset($_GET['key'])){ //문자열로 검색
         echo"<br><br>";
     }
 
-    $result[$strnum][8] = "0";
     for($i = 0; $i<$strnum; $i++){
 
         $sidx = $search[$i];
@@ -118,7 +134,7 @@ if(isset($_GET['key'])){ //문자열로 검색
         $result[$i][0] = $row['idx'];
         $result[$i][1] = $row['title'];
         $result[$i][2] = $row['head'];
-        $result[$i][3] = $row['body'];
+        $result[$i][3] = $row['preview'];
         $result[$i][4] = $row['comment'];
         $result[$i][5] = $row['views'];
         $result[$i][6] = $row['sugg'];
@@ -128,7 +144,7 @@ if(isset($_GET['key'])){ //문자열로 검색
             echo"result[$i][0] idx : ".$result[$i][0]."<br>";
             echo"result[$i][1] title : ".$result[$i][1]."<br>";
             echo"result[$i][2] head : ".$result[$i][2]."<br>";
-            echo"result[$i][3] body : ".$result[$i][3]."<br>";
+            echo"result[$i][3] preview : ".$result[$i][3]."<br>";
             echo"result[$i][4] comment : ".$result[$i][4]."<br>";
             echo"result[$i][5] views : ".$result[$i][5]."<br>";
             echo"result[$i][6] sugg : ".$result[$i][6]."<br>";
@@ -137,7 +153,10 @@ if(isset($_GET['key'])){ //문자열로 검색
         }
     }
 
-    $JSON = json_encode($result, JSON_PRETTY_PRINT);
+    if($strnum>0){
+        global $JSON;
+        $JSON = json_encode($result, JSON_PRETTY_PRINT);
+    }
 }
 
 if($debug){
@@ -151,12 +170,6 @@ if($debug){
 
 if(!$debug){
     header('Content-Type: application/json;');
-}
-
-if($strnum <= 0){
-    $result = array("NO SEARCH RESULTS");
-    $JSON = json_encode($result, JSON_PRETTY_PRINT);
-    // die("NO SEARCH RESULTS");
 }
 
 print($JSON);
