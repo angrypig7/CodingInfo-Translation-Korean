@@ -36,6 +36,7 @@ namespace WinAppClient
                 if (readVal == null) break;
                 categoriObjs.Add(new CategoriObj(readVal));
             }
+            reader.Close();
             return categoriObjs;
         }
 
@@ -52,7 +53,7 @@ namespace WinAppClient
                 string jsonTag = item[3].ToString();
                 string jsonUrl = item[1].ToString();
                 //TODO: json tag 파싱 마무리하기
-                result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink: jsonUrl));
+                result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink: jsonUrl, idx: jsonidx));
             }
             return result;
         }
@@ -88,7 +89,6 @@ namespace WinAppClient
             webRequest.UserAgent = @"Chrome";
             webResponse = webRequest.GetResponse();
             Stream responseStream = webResponse.GetResponseStream();
-            StreamReader responseStreamReader = new StreamReader(responseStream);
             //검색 값을 서버에 보내고, 웹페이지에 표시되는 모든 내용을 StreamReader 형식으로 반환
 
             //StreamReaderDebugWrite(responseStreamReader); //for test
@@ -97,8 +97,6 @@ namespace WinAppClient
             {
                 string readVal = "";
                 readVal = sr.ReadToEnd();
-                //readVal += "\n]";
-                //Console.Write(readVal);
                 jArray = JArray.Parse(readVal);
                 Console.Write(jArray.ToString());
             }
