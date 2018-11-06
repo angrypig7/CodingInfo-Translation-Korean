@@ -64,6 +64,9 @@ if(isset($_GET['key'])){
 $JSON = "";
 
 if(isset($_GET['idx'])){ //INDEX로 검색
+    if($debug){
+        echo"<h2>got idx</h2><br>";
+    }
     $SQL = "SELECT * FROM fish_data WHERE idx = '$idx'";
     $result_set = mysqli_query($conn, $SQL);
     $result = mysqli_fetch_assoc($result_set);
@@ -74,18 +77,13 @@ if(isset($_GET['idx'])){ //INDEX로 검색
         $strnum = 1;
 
         $data_title = $result['title'];
-        $data_head = $result['head'];
-        $data_preview = $result['preview'];
+        $data_author = $result['author'];
+        $data_url = $result['url'];
         $data_body = $result['body'];
-        $data_comment = $result['comment'];
+        $data_tag = $result['tag'];
         $data_views = $result['views'];
         $data_sugg = $result['sugg'];
         $data_date = $result['date'];
-
-        // $data = array('idx'=>$data_idx, 'title'=>$data_title, 'head'=>$data_head, 'preview'=>$data_preview,
-        // 'body'=>$data_body,'comment'=>$data_comment,'views'=>$data_views, 'sugg'=>$data_sugg, 'date'=>$data_date);
-
-        // $JSON = json_encode($data, JSON_PRETTY_PRINT);
 
         $JSON = $data_body;
     }else{
@@ -100,11 +98,19 @@ if(isset($_GET['idx'])){ //INDEX로 검색
 }
 
 if(isset($_GET['key'])){ //문자열로 검색
+    if($debug){
+        echo"<h2>got key</h2><br>";
+    }
+
     $strnum = 0;
 
-    $SQL = "SELECT idx FROM fish_data WHERE title LIKE '%$key%'";
+    $SQL = "SELECT idx FROM `fish_data` WHERE `title` LIKE '%$key%'";
     $search_set = mysqli_query($conn, $SQL);
-    $strnum = mysqli_num_rows($search_set);
+    if($search_set != FALSE){
+        $strnum = mysqli_num_rows($search_set);
+    }else{
+        $strnum = 0;
+    }
     $search[$strnum] = 0;
 
     if($strnum <= 0){
@@ -118,11 +124,11 @@ if(isset($_GET['key'])){ //문자열로 검색
         $search[$i] = $tmp['idx'];
     }
 
-    if($debug){
-        echo"<br>";
-        print_r($search_set);
-        echo"<br><br>";
-    }
+    // if($debug){
+    //     echo"<br>";
+    //     print_r($search_set);
+    //     echo"<br><br>";
+    // }
 
     for($i = 0; $i<$strnum; $i++){
 
@@ -131,47 +137,83 @@ if(isset($_GET['key'])){ //문자열로 검색
         $row_set = mysqli_query($conn, $SQL);
         $row = mysqli_fetch_assoc($row_set);
 
-        $result[$i][0] = $row['idx'];
-        $result[$i][1] = $row['title'];
-        $result[$i][2] = $row['head'];
-        $result[$i][3] = $row['preview'];
-        $result[$i][4] = $row['comment'];
-        $result[$i][5] = $row['views'];
-        $result[$i][6] = $row['sugg'];
-        $result[$i][7] = $row['date'];
+        global $JSON_temp;
+
+        // $result[$i] = $row['idx'];
+        
+        $JSON_temp_arr = array();
+        
+        // $JSON_temp_arr[0] = utf8_encode($row['idx']);
+        // $JSON_temp_arr[1] = utf8_encode($row['title']);
+        // $JSON_temp_arr[2] = utf8_encode($row['author']);
+        // $JSON_temp_arr[3] = utf8_encode($row['url']);
+        // $JSON_temp_arr[4] = utf8_encode($row['tag']);
+        // $JSON_temp_arr[5] = utf8_encode($row['views']);
+        // $JSON_temp_arr[6] = utf8_encode($row['sugg']);
+        // $JSON_temp_arr[7] = utf8_encode($row['date']);
+
+        $JSON_temp_arr[0] = $row['idx'];
+        $JSON_temp_arr[1] = $row['title'];
+        $JSON_temp_arr[2] = $row['author'];
+        $JSON_temp_arr[3] = $row['url'];
+        $JSON_temp_arr[4] = $row['tag'];
+        $JSON_temp_arr[5] = $row['views'];
+        $JSON_temp_arr[6] = $row['sugg'];
+        $JSON_temp_arr[7] = $row['date'];
+        
+        $JSON_temp = json_encode($JSON_temp_arr, JSON_UNESCAPED_SLASHES);
+
+        // $data = array('idx'=>$row[0], 'title'=>$row[1], 'head'=>$row[2],
+        // 'body'=>$row[3],'comment'=>$row[4],'views'=>$row[5], 'sugg'=>$row[6], 'date'=>$row[7]);
+        // $JSON_temp = json_encode($data, JSON_PRETTY_PRINT);
 
         if($debug){
-            echo"result[$i][0] idx : ".$result[$i][0]."<br>";
-            echo"result[$i][1] title : ".$result[$i][1]."<br>";
-            echo"result[$i][2] head : ".$result[$i][2]."<br>";
-            echo"result[$i][3] preview : ".$result[$i][3]."<br>";
-            echo"result[$i][4] comment : ".$result[$i][4]."<br>";
-            echo"result[$i][5] views : ".$result[$i][5]."<br>";
-            echo"result[$i][6] sugg : ".$result[$i][6]."<br>";
-            echo"result[$i][7] date : ".$result[$i][7]."<br>";
-            echo"===================<br><br>";
+            echo"JSON_temp_arr[0] idx: ".$JSON_temp_arr[0]."<br>";
+            echo"JSON_temp_arr[0] title: ".$JSON_temp_arr[1]."<br>";
+            echo"JSON_temp_arr[0] author: ".$JSON_temp_arr[2]."<br>";
+            echo"JSON_temp_arr[3] url: ".$JSON_temp_arr[3]."<br>";
+            echo"JSON_temp_arr[4] tag: ".$JSON_temp_arr[4]."<br>";
+            echo"JSON_temp_arr[5] views: ".$JSON_temp_arr[5]."<br>";
+            echo"JSON_temp_arr[6] sugg: ".$JSON_temp_arr[6]."<br>";
+            echo"JSON_temp_arr[7] date: ".$JSON_temp_arr[7]."<br>";
+            echo"JSON_temp[$i]: ";
+            print_r($JSON_temp);
+            echo"<br>===========================================<br>";
         }
     }
 
     if($strnum>0){
         global $JSON;
-        $JSON = json_encode($result, JSON_PRETTY_PRINT);
+        $JSON = json_encode($JSON_temp, JSON_UNESCAPED_SLASHES);
     }
 }
 
 if($debug){
-    echo"<br>";
+    global $JSON_temp;
+    
     echo"<br>idx = $idx </br>";
     echo"key = $key </br>";
     echo"strnum = $strnum </br>";
-    echo"<br>===========================================<br><br>";
-    print_r($result);
+    echo"JSON_temp: </br>";
+    print_r($JSON_temp);
+    echo"<br><br>===========================================<br><br>";
 }
 
-if(!$debug){
-    header('Content-Type: application/json;');
+if($debug == 0){
+    header('Content-Type: application/json; charset=utf-8');
+}else{
+    header('Content-Type: text/html; charset=utf-8');
 }
 
+// if($debug == 0){
+//     header('Content-Type: application/json; charset=euc-kr');
+// }else{
+//     header('Content-Type: text/html; charset=euc-kr');
+// }
+// $JSON = iconv("utf-8", "euc-kr", $JSON);
+$JSON = stripslashes($JSON);
+$JSON = substr($JSON, 1, -1);
+// $JSON = substr($JSON, -1);
 print($JSON);
 
 ?>
