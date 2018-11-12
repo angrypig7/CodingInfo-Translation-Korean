@@ -130,6 +130,7 @@ if(isset($_GET['key'])){ //문자열로 검색
     //     echo"<br><br>";
     // }
 
+    $JSON_temp = array();
     for($i = 0; $i<$strnum; $i++){
 
         $sidx = $search[$i];
@@ -157,11 +158,14 @@ if(isset($_GET['key'])){ //문자열로 검색
         $JSON_temp_arr[2] = $row['author'];
         $JSON_temp_arr[3] = $row['url'];
         $JSON_temp_arr[4] = $row['tag'];
+        $JSON_temp_arr[4] = str_replace(", ", " ", $JSON_temp_arr[4]);  // commas for tags
+        $JSON_temp_arr[4] = str_replace(" ", ", ", $JSON_temp_arr[4]);
         $JSON_temp_arr[5] = $row['views'];
         $JSON_temp_arr[6] = $row['sugg'];
         $JSON_temp_arr[7] = $row['date'];
         
-        $JSON_temp = json_encode($JSON_temp_arr, JSON_UNESCAPED_SLASHES);
+        // $JSON_temp[$i] = json_encode($JSON_temp_arr);
+        $JSON_temp[$i] = json_encode($JSON_temp_arr, JSON_FORCE_OBJECT);
 
         // $data = array('idx'=>$row[0], 'title'=>$row[1], 'head'=>$row[2],
         // 'body'=>$row[3],'comment'=>$row[4],'views'=>$row[5], 'sugg'=>$row[6], 'date'=>$row[7]);
@@ -177,14 +181,14 @@ if(isset($_GET['key'])){ //문자열로 검색
             echo"JSON_temp_arr[6] sugg: ".$JSON_temp_arr[6]."<br>";
             echo"JSON_temp_arr[7] date: ".$JSON_temp_arr[7]."<br>";
             echo"JSON_temp[$i]: ";
-            print_r($JSON_temp);
+            print_r($JSON_temp[$i]);
             echo"<br>===========================================<br>";
         }
     }
 
     if($strnum>0){
         global $JSON;
-        $JSON = json_encode($JSON_temp, JSON_UNESCAPED_SLASHES);
+        $JSON = json_encode(array($JSON_temp));
     }
 }
 
@@ -205,15 +209,13 @@ if($debug == 0){
     header('Content-Type: text/html; charset=utf-8');
 }
 
-// if($debug == 0){
-//     header('Content-Type: application/json; charset=euc-kr');
-// }else{
-//     header('Content-Type: text/html; charset=euc-kr');
-// }
-// $JSON = iconv("utf-8", "euc-kr", $JSON);
 $JSON = stripslashes($JSON);
 $JSON = substr($JSON, 1, -1);
-// $JSON = substr($JSON, -1);
+
+$JSON = str_replace("\"{", "{", $JSON);  //fuck
+$JSON = str_replace("}\"", "}", $JSON);
+$JSON = str_replace("\"[", "[", $JSON);
+$JSON = str_replace("]\"", "]", $JSON);
 print($JSON);
 
 ?>
