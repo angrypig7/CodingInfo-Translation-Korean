@@ -46,14 +46,19 @@ namespace WinAppClient
 
             foreach (var item in jObjectArray)
             {
-                int jsonidx = int.Parse(item[0].ToString());
-                string jsonTitle = item[1].ToString();
-                string jsonAuthor = item[2].ToString();
-                string jsonDate = item[7].ToString();
-                string jsonTag = item[3].ToString();
-                string jsonUrl = item[1].ToString();
-                //TODO: json tag 파싱 마무리하기
-                result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink: jsonUrl, idx: jsonidx));
+                try
+                {
+                    int jsonidx = int.Parse(item[0].ToString());
+                    string jsonTitle = item[1].ToString();
+                    string jsonAuthor = item[2].ToString();
+                    string jsonDate = item[7].ToString();
+                    string jsonTag = item[3].ToString();
+                    string jsonUrl = item[1].ToString();
+                    result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink: jsonUrl, idx: jsonidx));
+                } catch (System.InvalidOperationException e)
+                {
+                    MessageBox.Show("검색 결과에 오류가 있습니다.");
+                }
             }
             return result;
         }
@@ -97,8 +102,15 @@ namespace WinAppClient
             {
                 string readVal = "";
                 readVal = sr.ReadToEnd();
-                jArray = JArray.Parse(readVal);
-                Console.Write(jArray.ToString());
+
+                try
+                {
+                    jArray = JArray.Parse(readVal);
+                } catch (Exception e)
+                {
+                    jArray = null;
+                }
+                //Console.Write(jArray.ToString());
             }
         }
 
