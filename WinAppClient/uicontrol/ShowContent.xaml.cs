@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,8 @@ namespace WinAppClient.uicontrol
         {
             InitializeComponent();
             this.markdownObj = markdownString;
+            markdownObj = markdownObj.Insert(0, "<head><meta http-equiv='Content-Type' content='text/html;charset=UTF-8'></head> <body>");
+            markdownObj += "</body>";
         }
 
         private void MarkdownViewer_Loaded(object sender, RoutedEventArgs e)

@@ -87,22 +87,44 @@ namespace WinAppClient
             TB_Search.Text = null;
             this.SubmitSearchStringtoServer(searchKeyword, out jsonArray);
 
-            var searchResult = this.GetSearchResults(JArray.Parse(File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample02.json")));
-            //for test
+            if(jsonArray == null)
+            {
 
-            AddSearchResulttoPanel(searchResult);
+            }
+            else
+            {
+                var searchResult = this.GetSearchResults(jsonArray);
+                AddSearchResulttoPanel(searchResult);
+            }
         }
 
         private void SearchResult_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            //TODO: 마크다운 창 예쁘게 꾸미기
+            string szIdx = null;
+            szIdx = (sender as SearchResult).Idx.ToString();
+            Uri uri = new Uri(URL + @"idx=" + szIdx);
+            Console.WriteLine(uri.ToString());
+            HttpWebRequest webRequest = HttpWebRequest.CreateHttp(uri);
+            WebResponse webResponse;
 
-            var test = File.ReadAllText(Directory.GetCurrentDirectory() + @"\sample01.md");
-            //for test
+            webRequest.Method = "GET";
+            webRequest.UserAgent = @"Chrome";
+            webResponse = webRequest.GetResponse();
+            Stream responseStream = webResponse.GetResponseStream();
+
+            string markdownSz;
+            using (StreamReader sr = new StreamReader(responseStream))
+            {
+                var markdownVal = sr.ReadToEnd();
+                markdownSz = markdownVal;
+            }
+            // ?idx=OOO 로 검색했을 때 표시되는 마크다운 값 읽기
+
             var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
-            var markdownObj = Markdown.ToHtml(test, pipeline);
+            var markdownObj = Markdown.ToHtml(markdownSz, pipeline);
             var showContent = new uicontrol.ShowContent(markdownObj);
             showContent.Show();
+            //마크다운 창 표시
         }
     }
 }

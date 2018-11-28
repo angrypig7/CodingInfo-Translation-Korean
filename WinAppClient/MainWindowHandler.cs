@@ -36,6 +36,7 @@ namespace WinAppClient
                 if (readVal == null) break;
                 categoriObjs.Add(new CategoriObj(readVal));
             }
+            reader.Close();
             return categoriObjs;
         }
 
@@ -45,13 +46,19 @@ namespace WinAppClient
 
             foreach (var item in jObjectArray)
             {
-                string jsonTitle = item["title"].ToString();
-                string jsonAuthor = item["author"].ToString();
-                string jsonDate = item["date"].ToString();
-                string jsonTag = item["tag"].ToString();
-                string jsonUrl = item["url"].ToString();
-                //TODO: json tag 파싱 마무리하기
-                result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink: jsonUrl));
+                try
+                {
+                    int jsonidx = int.Parse(item[0].ToString());
+                    string jsonTitle = item[1].ToString();
+                    string jsonAuthor = item[2].ToString();
+                    string jsonDate = item[7].ToString();
+                    string jsonTag = item[3].ToString();
+                    string jsonUrl = item[1].ToString();
+                    result.Add(new SearchResult(title: jsonTitle, author: jsonAuthor, date: jsonDate, tags: jsonTag, markdownDocLink: jsonUrl, idx: jsonidx));
+                } catch (System.InvalidOperationException e)
+                {
+                    MessageBox.Show("검색 결과에 오류가 있습니다.");
+                }
             }
             return result;
         }
@@ -87,8 +94,24 @@ namespace WinAppClient
             webRequest.UserAgent = @"Chrome";
             webResponse = webRequest.GetResponse();
             Stream responseStream = webResponse.GetResponseStream();
-            StreamReader responseStreamReader = new StreamReader(responseStream);
-            StreamReaderTest(responseStreamReader); //for test
+            //검색 값을 서버에 보내고, 웹페이지에 표시되는 모든 내용을 StreamReader 형식으로 반환
+
+            //StreamReaderDebugWrite(responseStreamReader); //for test
+
+            using (StreamReader sr = new StreamReader(responseStream))
+            {
+                string readVal = "";
+                readVal = sr.ReadToEnd();
+
+                try
+                {
+                    jArray = JArray.Parse(readVal);
+                } catch (Exception e)
+                {
+                    jArray = null;
+                }
+                //Console.Write(jArray.ToString());
+            }
         }
 
         public void SubmitCategoryStringtoServer(string targetString, out JArray jArray)
@@ -103,11 +126,13 @@ namespace WinAppClient
             webResponse = webRequest.GetResponse();
             Stream responseStream = webResponse.GetResponseStream();
             StreamReader responseStreamReader = new StreamReader(responseStream);
-            StreamReaderTest(responseStreamReader);
+            //검색 값을 서버에 보내고, 웹페이지에 표시되는 모든 내용을 StreamReader 형식으로 반환
+
+            StreamReaderDebugWrite(responseStreamReader);
         }
 
 
-        private static void StreamReaderTest(StreamReader streamReader)
+        private static void StreamReaderDebugWrite(StreamReader streamReader)
         {
             for (; ; )
             {
